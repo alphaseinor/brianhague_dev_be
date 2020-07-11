@@ -75,16 +75,52 @@ router.get('/usernames', (req, res) => {
     })
 })
 
-// router.get('/count', userCounter, (req, res)=>{
-  
-//   res.status(200).json({
-//     error: false, 
-//     message: req.user_counter
-//   })
-// })
+router.post('/confirmation', validateConfirmation, confirmationExists, (req, res) => {
+  Users.updateUser(req.confirmed.id, {is_confirmed: true})
+    .then(updated =>{
+      res.status(200).json({
+        error: false,
+        message: "Thank you for validating your email",
+      })
+    })
+    .catch(err =>{
+      res.status(400).json({
+        error: true,
+        message: "Failed to update record"
+      })
+    })
+})
+
+function confirmationExists(req, res, next){
+  Users.confirmUser(req.body.confirmation_num)
+    .then(confirm => {
+      console.log(confirm)
+      req.confirmed = confirm
+      next()
+    })
+    .catch(err=>{
+      res.status(400).json({
+        error:true,
+        message: "This is not a valid confirmation number, log into your account and request a new confirmation email",
+        err:err 
+      })
+    })
+}
+
+function validateConfirmation(req, res, next){
+  if(req.body.confirmation_num){
+    next()
+  }else{
+    res.status(400).json({
+      error: true,
+      message: "Confirmation code required"
+    })
+  }
+
+}
 
 function userCounter(req, res, next){
-  //this should be the last middleware
+  //this should be the last middleware in register only
   Users.countUsers()
     .then((count)=>{
       console.log("User Count: ", count.count)

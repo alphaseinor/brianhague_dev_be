@@ -24,6 +24,20 @@ const countUsers = async () => {
   return count
 }
 
+const confirmUser = async (confirmation_num) => {
+  const confirm = await db('users')
+    .where({confirmation_num: confirmation_num})  
+    .first()
+    .select('*')
+  return confirm
+}
+
+const updateUser = async (id, obj) => {
+  const update = await db('users')
+    .where({id: id})
+    .update(obj)
+}
+
 async function addUser(user) {
    const [id] = await db('users')
       .insert(user)
@@ -43,5 +57,7 @@ module.exports = {
    findById,
    findBy,
    countUsers,
-   userList
+   userList,
+   confirmUser,
+   updateUser
 }
