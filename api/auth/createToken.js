@@ -14,9 +14,10 @@ const createToken = async id => {
         twofactor_type: user.twofactor_type,
         is_active: user.is_active
       }
-
+      //token expires in:
+      const hours = 1
       const options = {
-        expiresIn: 60 * 60 * 1000
+        expiresIn: 60 * 60 * hours
       }
 
       const token = jwt.sign(payload, secret, options)

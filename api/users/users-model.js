@@ -8,6 +8,18 @@ const findById = async id => {
    return user
 }
 
+const userList = async () => {
+  const list = await db('users')
+    .select('username')
+}
+
+const countUsers = async () => {
+  const count = await db('users')
+    .count('id')
+    .first()
+  return count
+}
+
 async function addUser(user) {
    const [id] = await db('users')
       .insert(user)
@@ -25,5 +37,7 @@ async function findBy(username) {
 module.exports = {
    addUser,
    findById,
-   findBy
+   findBy,
+   countUsers,
+   userList
 }
