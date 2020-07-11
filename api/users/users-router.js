@@ -29,7 +29,11 @@ router.post('/register', validateEmail, validateUsername, validatePassword, user
   Users.addUser(req.body)
       .then(async user => {
         const token = await createToken(user.id)
-        res.status(201).json({token})
+        res.status(201).json({
+          error: false,
+          message: "Successfully Registered",
+          token: token
+        })
       })
       .catch(err => {
         res.status(500).json({
@@ -45,7 +49,10 @@ router.post('/login', validateUsername, validatePassword, async (req, res) => {
        .then(async user => {
          if(user && bcrypt.compareSync(req.body.password, user.password)){
            const token = await createToken(user.id)
-           res.status(200).json({error: false, token: token})
+           res.status(200).json({
+             error: false,
+             message: "Login Successful", 
+             token: token})
          } else {
           res.status(400).json({
             message: "Username and/or Password Incorrect",
@@ -73,20 +80,29 @@ router.get('/usernames', (req, res) => {
         user_list: userlist
       })
     })
+    .catch(err =>{
+      res.status(400).json({
+        error: true,
+        message: "Failed to retreive user list",
+        err:err
+      })
+    })
 })
 
 router.post('/confirmation', validateConfirmation, confirmationExists, (req, res) => {
   Users.updateUser(req.confirmed.id, {is_confirmed: true})
-    .then(updated =>{
+    .then(() =>{
       res.status(200).json({
         error: false,
         message: "Thank you for validating your email",
+
       })
     })
     .catch(err =>{
       res.status(400).json({
         error: true,
-        message: "Failed to update record"
+        message: "Failed to update record",
+        err:err
       })
     })
 })
@@ -95,8 +111,15 @@ function confirmationExists(req, res, next){
   Users.confirmUser(req.body.confirmation_num)
     .then(confirm => {
       console.log(confirm)
-      req.confirmed = confirm
-      next()
+      if(confirm.is_confirmed){
+        res.status(400).json({
+          error: true,
+          message: "Account is already confirmed"
+        })
+      }else{
+        req.confirmed = confirm
+        next()
+      }
     })
     .catch(err=>{
       res.status(400).json({
