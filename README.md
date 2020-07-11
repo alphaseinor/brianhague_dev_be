@@ -43,7 +43,6 @@ is_confirmed: boolean,
 twofactor_type: "string",
 username:"string",
 email: "string",
-is_admin: boolean,
 is_active: boolean
 ```
 
@@ -65,7 +64,6 @@ is_confirmed: boolean,
 twofactor_type: "string",
 username:"string",
 email: "string",
-is_admin: boolean,
 is_active: boolean
 ```
 
