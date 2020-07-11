@@ -67,3 +67,15 @@ email: "string",
 is_active: boolean
 ```
 
+## /api/users/confirmation
+```
+Front end will forward confirmation param to confirmation endpoint as
+
+{
+  "confirmation_num":param
+}
+
+```
+
+### returns
+will return a standard error/message group 
