@@ -24,4 +24,46 @@ SITE_NAME=yourSiteName.com
 [ ] - make sure site is deployed by going to root
 [ ] - run knex migrate:latest on heroku server
 
+# endpoints
+
+## /api/users/login
+```
+Front end should only have access to the following fields to login.
+username - text field, normalize to lower case, no special characters - required min 2 characters max 50 characters
+password - text field, minimum of 8 characters - required max 255 characters
+```
+### returns
+```
+{token:"jwt"}
+```
+### jwt will decode to
+```
+id:"string",
+is_confirmed: boolean,
+twofactor_type: "string",
+username:"string",
+email: "string",
+is_active: boolean
+```
+
+## /api/users/register
+```
+Front end should only have access to the following fields to register.
+username - text field, normalize to lower case, no special characters - required min 2 characters max 50 characters
+email - text field, validated via regex - required max 255 characters
+password - text field, minimum of 8 characters - required max 255 characters
+```
+### returns
+```
+{token:"jwt"}
+```
+### jwt will decode to
+```
+id:"string",
+is_confirmed: boolean,
+twofactor_type: "string",
+username:"string",
+email: "string",
+is_active: boolean
+```
 
