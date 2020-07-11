@@ -80,22 +80,29 @@ router.get('/usernames', (req, res) => {
         user_list: userlist
       })
     })
+    .catch(err =>{
+      res.status(400).json({
+        error: true,
+        message: "Failed to retreive user list",
+        err:err
+      })
+    })
 })
 
 router.post('/confirmation', validateConfirmation, confirmationExists, (req, res) => {
   Users.updateUser(req.confirmed.id, {is_confirmed: true})
-    .then(async updated =>{
-      const token = await createToken(user.id)
+    .then(() =>{
       res.status(200).json({
         error: false,
         message: "Thank you for validating your email",
-        token: token
+
       })
     })
     .catch(err =>{
       res.status(400).json({
         error: true,
-        message: "Failed to update record"
+        message: "Failed to update record",
+        err:err
       })
     })
 })
