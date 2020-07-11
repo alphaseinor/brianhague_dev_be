@@ -26,8 +26,9 @@ const createToken = async id => {
     })
     .catch(err => {
       res.status(500).json({
+        error: true,
         message: "Token creation failed",
-        error: err
+        err: err
       })
     })
 }

@@ -11,6 +11,10 @@ const findById = async id => {
 const userList = async () => {
   const list = await db('users')
     .select('username')
+  const arrList = await list.map((user)=>{
+    return user.username
+  })
+  return arrList
 }
 
 const countUsers = async () => {

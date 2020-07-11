@@ -27,16 +27,17 @@ router.post('/register', validateEmail, validateUsername, validatePassword, user
   req.body.phone = "" //not implemented
 
   Users.addUser(req.body)
-       .then(async user => {
-         const token = await createToken(user.id)
-         res.status(201).json({token})
-       })
-       .catch(err => {
-         res.status(500).json({
-            message: "error adding user",
-            error: err
-          })
-       })
+      .then(async user => {
+        const token = await createToken(user.id)
+        res.status(201).json({token})
+      })
+      .catch(err => {
+        res.status(500).json({
+          error: false,
+          message: "error adding user",
+          err: err
+        })
+      })
 })
 
 router.post('/login', validateUsername, validatePassword, async (req, res) => {
@@ -62,13 +63,25 @@ router.post('/login', validateUsername, validatePassword, async (req, res) => {
        })
 })
 
-router.get('/count', userCounter, (req, res)=>{
-  
-  res.status(200).json({
-    error: false, 
-    message: req.user_counter
-  })
+router.get('/usernames', (req, res) => {
+  Users.userList()
+    .then(userlist => {
+      console.log(userlist)
+      res.status(200).json({
+        error: false,
+        message: "userlist retreived",
+        user_list: userlist
+      })
+    })
 })
+
+// router.get('/count', userCounter, (req, res)=>{
+  
+//   res.status(200).json({
+//     error: false, 
+//     message: req.user_counter
+//   })
+// })
 
 function userCounter(req, res, next){
   //this should be the last middleware
