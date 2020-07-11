@@ -69,7 +69,7 @@ router.get('/usernames', (req, res) => {
       console.log(userlist)
       res.status(200).json({
         error: false,
-        message: "userlist retreived",
+        message: "user list retreived",
         user_list: userlist
       })
     })
