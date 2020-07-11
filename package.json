@@ -1,0 +1,42 @@
+{
+  "name": "backend-recipe",
+  "version": "1.0.0",
+  "description": "",
+  "apidoc": {
+    "name": "recipe-be",
+    "version": "1.0.0",
+    "description": "Back end for recipe app",
+    "title": "Recipes",
+    "url": "https://sfr-backend.herokuapp.com"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "doc": "apidoc -i apidocs -o apidoc-out && apidoc-markdown -p apidoc-out -o README.md && rm -rf apidoc-out"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alphaseinor/backend-recipe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alphaseinor/backend-recipe/issues"
+  },
+  "homepage": "https://github.com/alphaseinor/backend-recipe#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.23.2",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.1",
+    "pg": "^7.12.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
