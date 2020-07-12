@@ -15,6 +15,7 @@ DATABASE_URL=postgres://postgres:password@localhost:5432/postgres
 NODE_ENV=development test or production
 SECRET_JWT=whatever your secret for your jwt is
 SITE_NAME=yourSiteName.com
+CONFIRMATION_PATH=path where your confirmation emails are verfied
 
 ## Deployment Instructions
 [ ] - Push your changes
