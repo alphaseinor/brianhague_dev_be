@@ -2,6 +2,22 @@
 Backend for brianhague.dev
 By Brian Hague (alphaseinor)
 
+
+## Tech Stacks
+### dependencies
+   - bcryptjs
+   - cors
+   - dotenv
+   - express
+   - helmet
+   - jsonwebtoken
+   - knex
+   - pg
+   - uuid
+  ### devDependencies
+   - nodemon
+
+
 ## Installation Instructions
 [ ] - Fork this repo
 [ ] - Clone your own repo
