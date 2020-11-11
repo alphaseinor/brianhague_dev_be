@@ -3,7 +3,7 @@ Backend for brianhague.dev
 By Brian Hague (alphaseinor)
 
 
-## Tech Stacks
+## Tech Stack
 ### dependencies
    - bcryptjs
    - cors
